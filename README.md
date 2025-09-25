@@ -85,8 +85,8 @@ This project automates the creation of **cloud-based development sandboxes** usi
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd vps
+   git clone https://github.com/paulpham157/Daytona-Sandbox-Claude-Code-Router
+   cd Daytona-Sandbox-Claude-Code-Router
    ```
 
 2. **Install dependencies**
@@ -100,9 +100,10 @@ This project automates the creation of **cloud-based development sandboxes** usi
    cp .env.example .env
    ```
 
+   Replace with your API keys.
    Required environment variables:
    - `DAYTONA_API_KEY` - Your Daytona platform API key
-     - Get it from: https://app.daytona.io/account/api-keys
+     - Get it from: https://app.daytona.io/dashboard/keys
    - `IMAGE_NAME` - Base image for sandbox (default: ubuntu:24.04)
    - `CPU` - CPU cores allocation (default: 4)
    - `MEMORY` - Memory in GB (default: 8)
@@ -113,17 +114,17 @@ This project automates the creation of **cloud-based development sandboxes** usi
 
    **Primary LLM Providers (choose at least one):**
    - `GEMINI_API_KEY` - Google Gemini API key
-     - Get it from: https://makersuite.google.com/app/apikey
+     - Get it from: https://aistudio.google.com/app/apikey
    - `OPENROUTER_API_KEY` - OpenRouter API key (recommended for 50+ models)
-     - Get it from: https://openrouter.ai/keys
+     - Get it from: https://openrouter.ai/settings/keys
    - `GROQ_API_KEY` - Groq API key
      - Get it from: https://console.groq.com/keys
    - `PERPLEXITY_API_KEY` - Perplexity API key
-     - Get it from: https://www.perplexity.ai/settings/api
+     - Get it from: https://www.perplexity.ai/account/api/keys
 
    **Additional Services (optional):**
    - `E2B_API_KEY` - E2B API key (TODO - Planned feature)
-     - Get it from: https://e2b.dev/docs
+     - https://e2b.dev/docs
 
    **⚠️ Important**: Configure corresponding `CCR_*_MODEL` environment variables based on your chosen provider(s).
 
@@ -132,7 +133,7 @@ This project automates the creation of **cloud-based development sandboxes** usi
 ### Basic Usage
 
 1. **Start the application**
-   ```bash
+```bash
 npm run dev
 ```
 
@@ -141,54 +142,56 @@ npm run dev
 Before running the application, you'll need to obtain API keys from various providers:
 
 #### 1. Daytona Platform API Key (Required)
-1. Go to [https://app.daytona.io/account/api-keys](https://app.daytona.io/account/api-keys)
-2. Sign in to your Daytona account
+1. Go to https://app.daytona.io/dashboard/keys
+2. Sign in to your Daytona account, for new account, Daytona will give you $100 at https://app.daytona.io/dashboard/billing/wallet
 3. Click "Create API Key" or use an existing one
-4. Copy the API key and set it as `DAYTONA_API_KEY`
+4. Copy the API key and set it as `DAYTONA_API_KEY` in .env
 
 #### 2. LLM Provider API Keys (⚠️ Required: Choose at least one)
 
 **You must configure at least one of the following LLM providers:**
 
 **Option 1: Google Gemini (Recommended for beginners):**
-1. Visit [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
+1. Visit https://aistudio.google.com/app/apikey
 2. Sign in with your Google account
 3. Click "Create API key"
 4. Copy the API key and set it as `GEMINI_API_KEY`
-5. **Configure CCR variables**:
+5. **Configure CCR variables in .env**:
    ```bash
    export CCR_DEFAULT_MODEL="gemini,gemini-2.5-flash"
    export CCR_THINK_MODEL="gemini,gemini-2.5-pro"
+   ...
    ```
 
 **Option 2: OpenRouter (Recommended for maximum model access):**
-1. Go to [https://openrouter.ai/keys](https://openrouter.ai/keys)
+1. Go to https://openrouter.ai/settings/keys
 2. Sign up or sign in to OpenRouter
 3. Navigate to "API Keys" section
 4. Create a new API key and set it as `OPENROUTER_API_KEY`
-5. **Configure CCR variables** (example with DeepSeek):
+5. **Configure CCR variables in .env** (example with DeepSeek):
    ```bash
    export CCR_DEFAULT_MODEL="openrouter,deepseek/deepseek-r1"
    export CCR_THINK_MODEL="openrouter,deepseek/deepseek-r1"
+   ...
    ```
 
 **Option 3: Groq (For fastest inference):**
-1. Visit [https://console.groq.com/keys](https://console.groq.com/keys)
+1. Visit https://console.groq.com/keys
 2. Sign up or sign in to Groq
 3. Go to "API Keys" in your dashboard
 4. Generate a new API key and set it as `GROQ_API_KEY`
-5. **Configure CCR variables**:
+5. **Configure CCR variables in .env**:
    ```bash
    export CCR_DEFAULT_MODEL="groq,llama-3.3-70b-versatile"
    export CCR_THINK_MODEL="groq,deepseek-r1-distill-llama-70b"
    ```
 
 **Option 4: Perplexity (For web-enhanced AI):**
-1. Go to [https://www.perplexity.ai/settings/api](https://www.perplexity.ai/settings/api)
+1. Go to https://www.perplexity.ai/account/api/keys
 2. Sign in to your Perplexity account
 3. Navigate to "API" settings
 4. Create an API key and set it as `PERPLEXITY_API_KEY`
-5. **Configure CCR variables**:
+5. **Configure CCR variables in .env**:
    ```bash
    export CCR_DEFAULT_MODEL="perplexity,sonar"
    export CCR_WEB_SEARCH_MODEL="perplexity,sonar-pro"
@@ -197,11 +200,8 @@ Before running the application, you'll need to obtain API keys from various prov
 #### 3. Additional Services (Optional)
 
 **E2B API Key (TODO - Planned Feature):**
-1. Visit [https://e2b.dev/docs](https://e2b.dev/docs)
-2. Sign up for an E2B account
-3. Follow the documentation to get your API key
-4. Set it as `E2B_API_KEY`
-5. ⚠️ **Note**: E2B integration is currently planned but not yet implemented
+1. Visit https://e2b.dev/docs
+2. ⚠️ **Note**: E2B integration is currently planned but not yet implemented
 
 **💡 Pro Tips:**
 - **OpenRouter** gives you access to 50+ models with a single API key
@@ -225,13 +225,13 @@ Customize sandbox resources by setting environment variables:
 ```bash
 # High-performance sandbox
 export CPU=8
-export MEMORY=16
-export DISK=20
+export MEMORY=8
+export DISK=10
 npm run dev
 
 # Minimal sandbox
-export CPU=2
-export MEMORY=4
+export CPU=1
+export MEMORY=1
 export DISK=5
 npm run dev
 ```
@@ -240,7 +240,7 @@ npm run dev
 
 Once your sandbox is created, you'll have access to a fully configured development environment with:
 
-### Pre-installed Tools in Sandbox
+### Pre-installed Tools in this Daytona Sandbox
 The following tools are automatically installed and configured in your Daytona sandbox:
 
 - **🟢 uv** - Fast Python package installer and resolver (latest version)
@@ -267,19 +267,19 @@ The Claude Code Router is pre-configured with intelligent routing:
 - **Gemini**: Google's latest models with vision/audio capabilities
 - **Groq**: Ultra-fast inference with Llama 4 and DeepSeek models
 - **Perplexity**: Web-enhanced models for research and analysis
-- **E2B** (TODO): Planned AI code execution sandbox
+- **Other Providers**: You can setup in `~/.claude-code-router/config.json`
 
 ### Sandbox Environment Setup
 Your sandbox is pre-configured with the following environment:
 
-- **🌐 Vietnamese locale (vi_VN.UTF-8)** - Full Vietnamese language support
+- **🌐 Vietnamese locale (vi_VN.UTF-8)** - Vietnamese language support in terminal
 - **⚙️ Custom bash configurations** - Optimized .bashrc with useful aliases
 - **🔒 SSL certificates & packages** - Essential system dependencies pre-installed
 - **🛠️ Development-optimized settings** - Ready-to-code environment
 
 **Example aliases available in sandbox:**
 - `specify` → `uvx --from git+https://github.com/github/spec-kit.git specify`
-- `claude` → Direct access to Claude Code
+- `claude` → Direct access to Claude Code via Claude Code Router
 - Vietnamese locale settings and custom ASCII art banner
 
 ## Accessing Your Sandbox
@@ -300,7 +300,7 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
    - **🌐 Multi-provider access** to 50+ AI models
    - **⚡ Automatic optimization** for speed vs quality
 4. **Install Claude Code Web UI (optional)**: `sh ~/install-cc-webui.sh`
-5. **Customize settings**: Edit `~/.claude-code-router/config.json`
+5. **Customize settings**: Edit `nano ~/.claude-code-router/config.json`
 
 ### Sandbox vs Local Machine
 
@@ -319,13 +319,14 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 
 ### Environment Variables
 
-| Variable | Description | Default | Required | Setup Guide |
-|----------|-------------|---------|----------|-------------|
-| `DAYTONA_API_KEY` | Daytona platform API key | - | Yes | [Get Key](https://app.daytona.io/account/api-keys) |
-| `IMAGE_NAME` | Base Docker image | `ubuntu:24.04` | No | - |
-| `CPU` | CPU cores | `4` | No | - |
-| `MEMORY` | Memory in GB | `8` | No | - |
-| `DISK` | Disk space in GB | `10` | No | - |
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `DAYTONA_API_KEY` | Daytona platform API key | - | Yes |
+| `IMAGE_NAME` | Base Docker image | `ubuntu:24.04` | No |
+| `CPU` | CPU cores | `4` | No |
+| `MEMORY` | Memory in GB | `8` | No |
+| `DISK` | Disk space in GB | `10` | No |
+
 
 ### Claude Code Router Configuration
 
@@ -341,14 +342,14 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 
 ### AI Provider API Keys
 
-| Variable | Description | Provider | Features | Setup Guide |
-|----------|-------------|----------|----------|-------------|
-| `GEMINI_API_KEY` | Google Gemini API key | Google AI | Vision, audio, reasoning | [Get Key](https://makersuite.google.com/app/apikey) |
-| `OPENROUTER_API_KEY` | OpenRouter API key | OpenRouter | 50+ AI models access | [Get Key](https://openrouter.ai/keys) |
-| `GROQ_API_KEY` | Groq API key | Groq | Ultra-fast inference | [Get Key](https://console.groq.com/keys) |
-| `PERPLEXITY_API_KEY` | Perplexity API key | Perplexity | Web search & research | [Get Key](https://www.perplexity.ai/settings/api) |
-| `E2B_API_KEY` | E2B API key | E2B | Code execution sandbox | [Get Key](https://e2b.dev/docs) |
-| `API_KEY_FAKE` | Placeholder API key | Local | Development/testing | - |
+| Variable | Description | Provider | Features |
+|----------|-------------|----------|----------|
+| `GEMINI_API_KEY` | Google Gemini API key | Google AI | Vision, audio, reasoning |
+| `OPENROUTER_API_KEY` | OpenRouter API key | OpenRouter | 50+ AI models access |
+| `GROQ_API_KEY` | Groq API key | Groq | Ultra-fast inference |
+| `PERPLEXITY_API_KEY` | Perplexity API key | Perplexity | Web search & research |
+| `E2B_API_KEY` | E2B API key | E2B | Code execution sandbox |
+| `API_KEY_FAKE` | Placeholder API key | Local | For Claude Code Router |
 
 ## Troubleshooting
 
@@ -359,13 +360,13 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
    - Check that Daytona API key has sufficient permissions
 
 2. **Resource Allocation Errors**
-   - Verify your Daytona account has enough resources allocated
-   - Try reducing CPU/Memory/Disk values if creation fails
+   - Verify your Daytona account has enough resources allocated, not reaching limited value
+   - Try reducing CPU/Memory/Disk values if creation fails, you can delete old sandbox to reducing
 
 3. **SSH Connection Issues**
    - Check firewall settings
    - Ensure SSH access token is correct
-   - Try regenerating SSH access if expired
+   - Try regenerating SSH access in Daytona dashboard Web UI
 
 4. **API Key Issues**
    - **No LLM Provider Configured**: You must set at least one of: `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `GROQ_API_KEY`, or `PERPLEXITY_API_KEY`
@@ -433,8 +434,8 @@ This project integrates several open-source components, each with their own lice
 
 #### Terms of Service
 - **OpenRouter**: Terms of Service (openrouter.ai/terms)
-- **Groq**: Terms of Service (groq.com/terms)
-- **Perplexity**: Terms of Service (perplexity.ai/terms)
+- **Groq**: Terms of Service (console.groq.com/docs/legal)
+- **Perplexity**: Terms of Service (www.perplexity.ai/hub/legal/perplexity-api-terms-of-service) (www.perplexity.ai/hub/legal/perplexity-api-terms-of-service-search)
 - **E2B** (TODO): Planned integration - Terms of Service (e2b.dev/terms)
 
 #### Open Source Licenses
@@ -479,24 +480,24 @@ For support and questions:
 - Create an issue in the repository
 - Check the Daytona documentation: https://docs.daytona.io
 - Review Claude Code documentation: https://docs.anthropic.com/claude
-- Claude Code Router configuration: Edit `~/.claude-code-router/config.json`
+- Claude Code Router repository: https://github.com/musistudio/claude-code-router
 - AI Provider documentation:
-  - OpenRouter: https://openrouter.ai/docs
+  - OpenRouter: https://openrouter.ai/docs/quickstart
   - Google Gemini: https://ai.google.dev/docs
-  - Groq: https://console.groq.com/docs
-  - Perplexity: https://docs.perplexity.ai/
+  - Groq: https://console.groq.com/docs/overview
+  - Perplexity: https://docs.perplexity.ai/getting-started/overview
 
 ## Architecture
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Daytona       │    │  Claude Code     │    │   AI Providers  │
-│   Sandbox       │───▶│     Router       │───▶│   - OpenRouter  │
-│                 │    │                  │    │   - Gemini      │
-│   + Tools       │    │   + Multi-Model  │    │   - Groq        │
-│   + Claude Code │    │   + Intelligent  │    │   - Perplexity  │
-│   + Router      │    │   + Routing      │    │                 │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐
+│   Daytona       │    │   AI Providers  │
+│   Sandbox       │───▶│   - OpenRouter  │
+│                 │    │   - Gemini      │
+│   + Tools       │    │   - Groq        │
+│   + Claude Code │    │   - Perplexity  │
+│   + Router      │    │                 │
+└─────────────────┘    └─────────────────┘
 ```
 
 ## Credits & Dependencies
@@ -504,13 +505,13 @@ For support and questions:
 This project integrates and builds upon several open-source projects and services:
 
 ### Core Dependencies
-- **[@daytonaio/sdk](https://github.com/daytonaio/sdk)** - Official Daytona SDK for sandbox management
+- **[@daytonaio/sdk](https://www.daytona.io/docs/en/typescript-sdk/)** - Official Daytona SDK for sandbox management
 - **[dotenv](https://github.com/motdotla/dotenv)** - Environment variable loading
 - **[tsx](https://github.com/esbuild-kit/tsx)** - TypeScript execution for Node.js
 - **[TypeScript](https://github.com/microsoft/TypeScript)** - TypeScript compiler and tooling
 
 ### AI & Development Tools
-- **[Claude Code](https://github.com/anthropic/claude-code)** - AI-powered coding assistant by Anthropic
+- **[Claude Code](https://github.com/anthropics/claude-code)** - AI-powered coding assistant by Anthropic
 - **[claude-code-router](https://github.com/musistudio/claude-code-router)** - Multi-provider AI gateway
 - **[claude-code-webui](https://github.com/sugyan/claude-code-webui)** - Web interface for Claude Code
 - **[uv](https://github.com/astral-sh/uv)** - Fast Python package installer and resolver
@@ -538,32 +539,6 @@ This project integrates and builds upon several open-source projects and service
 - **Anthropic** for Claude AI and Claude Code
 - **OpenRouter** for democratizing access to AI models
 - **All open-source contributors** who made this project possible
-
----
-
-## Quick Links & Resources
-
-### API Keys Setup
-- **Daytona API Key**: https://app.daytona.io/account/api-keys
-- **Google Gemini**: https://makersuite.google.com/app/apikey
-- **OpenRouter**: https://openrouter.ai/keys
-- **Groq**: https://console.groq.com/keys
-- **Perplexity**: https://www.perplexity.ai/settings/api
-- **E2B**: https://e2b.dev/docs
-
-### Documentation
-- **Daytona Docs**: https://docs.daytona.io
-- **Claude Code**: https://docs.anthropic.com/claude
-- **OpenRouter Models**: https://openrouter.ai/models
-- **Gemini API Docs**: https://ai.google.dev/docs
-- **Groq API Docs**: https://console.groq.com/docs
-- **Perplexity API Docs**: https://docs.perplexity.ai/
-
-### Community & Support
-- **GitHub Issues**: Report bugs and request features
-- **Daytona Community**: https://github.com/daytonaio/daytona
-- **OpenRouter Discord**: https://discord.gg/openrouter
-- **Claude Code GitHub**: https://github.com/anthropic/claude-code
 
 ---
 
