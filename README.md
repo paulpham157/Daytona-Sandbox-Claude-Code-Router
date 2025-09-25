@@ -45,7 +45,7 @@ This project automates the creation of **cloud-based development sandboxes** usi
 - 🌐 **SSH Access** - Secure SSH access to your sandbox environment
 - 📦 **Volume Persistence** - Persistent storage across sandbox sessions
 - 🔄 **Environment Variables** - Flexible configuration via environment variables
-- 🛠️ **Pre-installed Tools** - Complete development stack ready to use
+- 🛠️ **Pre-installed Tools** - Complete development stack ready to use (including rsync for efficient file synchronization)
 - 🌍 **Isolated Environment** - Your local machine remains unchanged
 
 ## Supported AI Providers
@@ -246,6 +246,7 @@ The following tools are automatically installed and configured in your Daytona s
 - **🟢 uv** - Fast Python package installer and resolver (latest version)
 - **🟢 nvm** - Node.js version manager with Node.js 20 pre-installed
 - **🟢 git** - Version control system with SSH keys configured
+- **🟢 rsync** - Fast, versatile file copying tool for efficient data synchronization
 - **🟢 Claude Code** - AI-powered coding assistant (latest version)
 - **🟢 pm2** - Advanced process manager for Node.js applications
 - **🟡 claude-code-webui** - Web interface for Claude Code (optional, install with `sh ~/install-cc-webui.sh`)
@@ -275,6 +276,7 @@ Your sandbox is pre-configured with the following environment:
 - **🌐 Vietnamese locale (vi_VN.UTF-8)** - Vietnamese language support in terminal
 - **⚙️ Custom bash configurations** - Optimized .bashrc with useful aliases
 - **🔒 SSL certificates & packages** - Essential system dependencies pre-installed
+- **📁 rsync** - Fast file synchronization and copying tool
 - **🛠️ Development-optimized settings** - Ready-to-code environment
 
 **Example aliases available in sandbox:**
@@ -309,6 +311,7 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 | **uv (Python)** | ❌ Install manually | ✅ Pre-installed |
 | **nvm (Node.js)** | ❌ Install manually | ✅ Pre-installed (Node.js 20) |
 | **Claude Code** | ❌ Install manually | ✅ Pre-installed & configured |
+| **rsync** | ❌ Install manually | ✅ Pre-installed |
 | **AI Router** | ❌ Setup required | ✅ Pre-configured |
 | **Vietnamese locale** | ❌ Manual setup | ✅ Pre-configured |
 | **Development tools** | ❌ Individual installs | ✅ All pre-installed |
@@ -528,6 +531,7 @@ This project integrates and builds upon several open-source projects and service
 ### System Tools
 - **[PM2](https://pm2.keymetrics.io/)** - Advanced Node.js process manager
 - **[Git](https://git-scm.com/)** - Distributed version control system
+- **[Rsync](https://rsync.samba.org/)** - Fast, versatile file copying tool
 - **[Ubuntu](https://ubuntu.com/)** - Base container image
 - **[Curl](https://curl.se/)** - Command line tool for transferring data
 - **[Nano](https://nano-editor.org/)** - Simple text editor
