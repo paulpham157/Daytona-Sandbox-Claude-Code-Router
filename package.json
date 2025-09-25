@@ -1,0 +1,35 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Daytona Sandbox Claude Code Router - Multi-provider AI gateway for cloud development environments",
+  "main": "vps.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx app.ts"
+  },
+  "keywords": [
+    "daytona",
+    "sandbox",
+    "claude-code",
+    "ai-router",
+    "multi-provider",
+    "cloud-development",
+    "typescript",
+    "ai-gateway",
+    "openrouter",
+    "gemini",
+    "groq",
+    "perplexity"
+  ],
+  "author": "Daytona Sandbox Claude Code Router Project",
+  "license": "MIT",
+  "dependencies": {
+    "@daytonaio/sdk": "^0.27.1",
+    "dotenv": "^17.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}

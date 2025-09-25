@@ -1,0 +1,146 @@
+{
+    "LOG": false,
+    "LOG_LEVEL": "debug",
+    "CLAUDE_PATH": "",
+    "HOST": "127.0.0.1",
+    "PORT": 3456,
+    "APIKEY": "${API_KEY_FAKE}",
+    "API_TIMEOUT_MS": "600000",
+    "PROXY_URL": "",
+    "transformers": [],
+    "Providers": [
+        {
+            "name": "openrouter",
+            "api_base_url": "https://openrouter.ai/api/v1/chat/completions",
+            "api_key": "${OPENROUTER_API_KEY}",
+            "models": [
+                "z-ai/glm-4.5-air:free",
+                "tngtech/deepseek-r1t-chimera:free",
+                "qwen/qwen3-235b-a22b:free",
+                "mistralai/devstral-small-2505:free",
+                "deepseek/deepseek-r1-0528:free",
+                "deepseek/deepseek-r1-0528-qwen3-8b:free",
+                "moonshotai/kimi-dev-72b:free",
+                "tngtech/deepseek-r1t2-chimera:free",
+                "tencent/hunyuan-a13b-instruct:free",
+                "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
+                "google/gemma-3n-e2b-it:free",
+                "moonshotai/kimi-k2:free",
+                "qwen/qwen3-coder:free",
+                "openai/gpt-oss-20b:free",
+                "openai/gpt-oss-120b:free",
+                "deepseek/deepseek-chat-v3.1:free",
+                "nvidia/nemotron-nano-9b-v2:free",
+                "microsoft/mai-ds-r1:free",
+                "arliai/qwq-32b-arliai-rpr-v1:free",
+                "agentica-org/deepcoder-14b-preview:free",
+                "moonshotai/kimi-vl-a3b-thinking:free",
+                "meta-llama/llama-4-maverick:free",
+                "meta-llama/llama-4-scout:free",
+                "mistralai/mistral-small-3.1-24b-instruct:free",
+                "google/gemma-3-27b-it:free",
+                "qwen/qwq-32b:free",
+                "cognitivecomputations/dolphin3.0-r1-mistral-24b:free",
+                "cognitivecomputations/dolphin3.0-mistral-24b:free",
+                "mistralai/mistral-small-24b-instruct-2501:free",
+                "deepseek/deepseek-r1-distill-llama-70b:free",
+                "deepseek/deepseek-r1:free",
+                "meta-llama/llama-3.1-405b-instruct:free",
+                "mistralai/mistral-nemo:free"
+            ],
+            "transformer": {
+                "use": [
+                    "openrouter"
+                ],
+                "z-ai/glm-4.5-air:free": {
+                    "use": [
+                        "openrouter"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "gemini",
+            "api_base_url": "https://generativelanguage.googleapis.com/v1beta/models/",
+            "api_key": "${GEMINI_API_KEY}",
+            "models": [
+                "gemini-2.5-flash",
+                "gemini-2.5-pro",
+                "gemma-3-27b-it",
+                "gemini-2.5-flash-image-preview",
+                "gemini-live-2.5-flash-preview",
+                "gemini-2.5-flash-lite",
+                "gemini-2.5-flash-preview-native-audio-dialog",
+                "gemini-2.5-flash-exp-native-audio-thinking-dialog",
+                "gemini-2.5-flash-preview-tts",
+                "gemini-2.5-pro-preview-tts"
+            ],
+            "transformer": {
+                "use": [
+                    "gemini"
+                ]
+            }
+        },
+        {
+            "name": "groq",
+            "api_base_url": "https://api.groq.com/openai/v1",
+            "api_key": "${GROQ_API_KEY}",
+            "models": [
+                "allam-2-7b",
+                "deepseek-r1-distill-llama-70b",
+                "gemma2-9b-it",
+                "groq/compound",
+                "groq/compound-mini",
+                "llama-3.1-8b-instant",
+                "llama-3.3-70b-versatile",
+                "meta-llama/llama-4-maverick-17b-128e-instruct",
+                "meta-llama/llama-4-scout-17b-16e-instruct",
+                "meta-llama/llama-guard-4-12b",
+                "meta-llama/llama-prompt-guard-2-22m",
+                "meta-llama/llama-prompt-guard-2-86m",
+                "moonshotai/kimi-k2-instruct",
+                "moonshotai/kimi-k2-instruct-0905",
+                "openai/gpt-oss-120b",
+                "openai/gpt-oss-20b",
+                "qwen/qwen3-32b",
+                "whisper-large-v3",
+                "whisper-large-v3-turbo",
+                "playai-tts",
+                "playai-tts-arabic"
+            ],
+            "transformer": {
+                "use": [
+                    "groq"
+                ]
+            }
+        },
+        {
+            "name": "perplexity",
+            "api_base_url": "https://api.perplexity.ai/chat/completions",
+            "api_key": "${PERPLEXITY_API_KEY}",
+            "models": [
+                "sonar",
+                "sonar-pro",
+                "sonar-reasoning",
+                "sonar-reasoning-pro",
+                "sonar-deep-research"
+            ],
+            "transformer": {
+                "use": [
+                    "perplexity"
+                ]
+            }
+        }
+    ],
+    "Router": {
+        "default": "${CCR_DEFAULT_MODEL}",
+        "background": "${CCR_BACKGROUND_MODEL}",
+        "think": "${CCR_THINK_MODEL}",
+        "longContext": "${CCR_LONG_CONTEXT_MODEL}",
+        "longContextThreshold": "${CCR_LONG_CONTEXT_THRESHOLD}",
+        "webSearch": "${CCR_WEB_SEARCH_MODEL}",
+        "image": "${CCR_IMAGE_MODEL}"
+    },
+    "CUSTOM_ROUTER_PATH": "",
+    "forceUseImageAgent": true
+}
