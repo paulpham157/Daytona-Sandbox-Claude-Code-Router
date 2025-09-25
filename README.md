@@ -215,6 +215,7 @@ Before running the application, you'll need to obtain API keys from various prov
    - Configure the sandbox with essential development tools
    - Install and configure Claude Code Router with multi-provider support
    - Set up intelligent AI model routing based on task types
+   - Copy MCP installation scripts for optional enhanced AI capabilities
    - Configure environment variables for all supported AI providers
    - Provide secure SSH access to your sandbox
 
@@ -253,6 +254,17 @@ The following tools are automatically installed and configured in your Daytona s
 
 **Note**: These tools are installed **inside the sandbox**, not on your local machine. The sandbox provides a complete, isolated development environment.
 
+### Basic MCP (Model Context Protocol) Servers
+The following MCP servers can be installed in your Daytona sandbox using the included script:
+
+- **🟡 perplexity-mcp** - Web search and real-time information retrieval
+- **🟡 pointer** - Browser automation and web interaction capabilities
+- **🟡 sequential-thinking** - Enhanced reasoning and step-by-step problem solving
+- **🟡 filesystem** - File system access and manipulation (root at `/root`)
+- **🟡 memory** - Persistent memory and knowledge graph functionality
+
+**Installation**: Run `sh ~/install-basic-mcps.sh` inside your sandbox to install these MCP servers.
+
 ### AI Router Configuration
 The Claude Code Router is pre-configured with intelligent routing:
 
@@ -269,6 +281,17 @@ The Claude Code Router is pre-configured with intelligent routing:
 - **Groq**: Ultra-fast inference with Llama 4 and DeepSeek models
 - **Perplexity**: Web-enhanced models for research and analysis
 - **Other Providers**: You can setup in `~/.claude-code-router/config.json`
+
+### MCP Server Capabilities
+The included MCP servers provide advanced functionality for enhanced AI development:
+
+- **🧠 Perplexity MCP**: Real-time web search and information retrieval
+- **🖱️ Pointer**: Browser automation, screenshot capture, and web interaction
+- **🧩 Sequential Thinking**: Step-by-step reasoning and complex problem decomposition
+- **📁 Filesystem**: Direct file system access and manipulation capabilities
+- **🧠 Memory**: Persistent memory storage and knowledge graph management
+
+**Usage**: After installing with `sh ~/install-basic-mcps.sh`, these MCP servers will be available when using Claude Code in your sandbox. You can reference them in your conversations and they will provide enhanced capabilities for web browsing, file management, complex reasoning, and persistent memory.
 
 ### Sandbox Environment Setup
 Your sandbox is pre-configured with the following environment:
@@ -296,13 +319,15 @@ ssh <access-token>@ssh.app.daytona.io
 Once connected to your sandbox, you'll have access to all pre-installed tools:
 
 1. **Navigate to your project folder**: `cd your-project`
-2. **Initialize with spec-kit (optional)**: `specify init --here`
-3. **Start coding with AI assistance**: `claude`
+2. **Install Basic MCP servers (optional)**: `sh ~/install-basic-mcps.sh`
+   - **🧠 Enhanced AI capabilities** with web search, browser automation, and memory
+3. **Initialize with spec-kit (optional)**: `specify init --here`
+4. **Start coding with AI assistance**: `claude`
    - **🧠 Intelligent model routing** based on your task
    - **🌐 Multi-provider access** to 50+ AI models
    - **⚡ Automatic optimization** for speed vs quality
-4. **Install Claude Code Web UI (optional)**: `sh ~/install-cc-webui.sh`
-5. **Customize settings**: Edit `nano ~/.claude-code-router/config.json`
+5. **Install Claude Code Web UI (optional)**: `sh ~/install-cc-webui.sh`
+6. **Customize settings**: Edit `nano ~/.claude-code-router/config.json`
 
 ### Sandbox vs Local Machine
 
@@ -315,6 +340,7 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 | **AI Router** | ❌ Setup required | ✅ Pre-configured |
 | **Vietnamese locale** | ❌ Manual setup | ✅ Pre-configured |
 | **Development tools** | ❌ Individual installs | ✅ All pre-installed |
+| **MCP Servers** | ❌ Manual installation | 🟡 Script available |
 
 **Note**: All tools and configurations are **sandbox-specific**. Your local machine remains unchanged.
 

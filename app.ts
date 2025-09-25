@@ -179,20 +179,21 @@ async function new_sandbox(
         1. Hi, I guess this is your first time using this sandbox.
         2. Go to your-project folder.
         3. \(Optional\) command "specify init --here" to init your project spec-kit. Each project need 1 spec kit.
-        Learn more: https:\/\/github.com\/github\/spec-kit
+            Learn more: https:\/\/github.com\/github\/spec-kit
         4. Use command "claude" to use Claude Code CLI as normal.
-        5. \(Optional\) use command "sh \~\/install-cc-webui.sh" to install Claude Code Web UI.
-        Attention: claude-code-webui currently no built-in auth mechanism, so keep your sandbox id safe
-        or integrate an additional layer of middleware security yourself.
-        Otherwise, someone who knows your sandbox id can use your Claude WebUI code.
-        Learn more: https:\/\/github.com\/sugyan\/claude-code-webui
-        6. Command "bash" to see this message again. Or you will see this message again when next time ssh to this sandbox :\Đ.
+        5. \(Optional\) use command "sh \~\/install-basic-mcps.sh" to install basic MCP servers for Claude Code.
+        6. \(Optional\) use command "sh \~\/install-cc-webui.sh" to install Claude Code Web UI.
+            Attention: claude-code-webui currently no built-in auth mechanism, so keep your sandbox id safe
+            or integrate an additional layer of middleware security yourself.
+            Otherwise, someone who knows your sandbox id can use your Claude WebUI code.
+            Learn more: https:\/\/github.com\/sugyan\/claude-code-webui
+        7. Command "bash" to see this message again. Or you will see this message again when next time ssh to this sandbox :\Đ.
         
         \\e[0m
         '
         ccr restart`)
 
-        console.log('Installing Claude Code... you will see it done when ssh command appear.\n')
+        console.log('Installing Claude Code... you will see it done when ssh command appear. Look around, is there anyone behind you? This is very important, ssh command use to access to this sandbox.')
         await sandbox.process.executeCommand(`
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -209,8 +210,13 @@ async function new_sandbox(
             {
                 source: 'install-cc-webui.sh',
                 destination: '/root/install-cc-webui.sh'
+            },
+            {
+                source: 'install-basic-mcps.sh',
+                destination: '/root/install-basic-mcps.sh'
             }
         ], 86400)
+
 
         const ssh_access = await sandbox.createSshAccess(2147483647)
         console.log(`ssh ${ssh_access.token}@ssh.app.daytona.io`)
