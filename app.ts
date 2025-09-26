@@ -131,7 +131,7 @@ async function new_sandbox(
         await sandbox.process.executeCommand(`
             apt update && \
             apt upgrade -y && \
-            apt install ca-certificates gnupg curl htop wget nano git locales rsync -y && \
+            apt install ca-certificates gnupg curl htop wget nano git locales rsync lsof -y && \
             locale-gen vi_VN.UTF-8 && \
             update-locale LANG=vi_VN.UTF-8 LC_ALL=vi_VN.UTF-8 && \
             curl -LsSf https://astral.sh/uv/install.sh | sh && \

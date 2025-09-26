@@ -43,7 +43,7 @@ This project automates the creation of **cloud-based development sandboxes** usi
   - **Image**: Vision and image understanding tasks
 - 🔧 **Customizable Resources** - Configurable CPU, memory, and disk allocation
 - 🌐 **SSH Access** - Secure SSH access to your sandbox environment
-- 📦 **Volume Persistence** - Persistent storage across sandbox sessions
+- 📦 **Volume Persistence** - Persistent storage across sandbox sessions with file sharing between sandboxes
 - 🔄 **Environment Variables** - Flexible configuration via environment variables
 - 🛠️ **Pre-installed Tools** - Complete development stack ready to use (including rsync for efficient file synchronization)
 - 🌍 **Isolated Environment** - Your local machine remains unchanged
@@ -215,6 +215,7 @@ Before running the application, you'll need to obtain API keys from various prov
    - Configure the sandbox with essential development tools
    - Install and configure Claude Code Router with multi-provider support
    - Set up intelligent AI model routing based on task types
+   - Install system monitoring tools including lsof and htop
    - Copy MCP installation scripts for optional enhanced AI capabilities
    - Configure environment variables for all supported AI providers
    - Provide secure SSH access to your sandbox
@@ -248,6 +249,7 @@ The following tools are automatically installed and configured in your Daytona s
 - **🟢 nvm** - Node.js version manager with Node.js 20 pre-installed
 - **🟢 git** - Version control system with SSH keys configured
 - **🟢 rsync** - Fast, versatile file copying tool for efficient data synchronization
+- **🟢 lsof** - LiSt Open Files - Essential tool for monitoring file access and network connections
 - **🟢 Claude Code** - AI-powered coding assistant (latest version)
 - **🟢 pm2** - Advanced process manager for Node.js applications
 - **🟡 claude-code-webui** - Web interface for Claude Code (optional, install with `sh ~/install-cc-webui.sh`)
@@ -300,12 +302,43 @@ Your sandbox is pre-configured with the following environment:
 - **⚙️ Custom bash configurations** - Optimized .bashrc with useful aliases
 - **🔒 SSL certificates & packages** - Essential system dependencies pre-installed
 - **📁 rsync** - Fast file synchronization and copying tool
+- **🔍 lsof** - LiSt Open Files - Monitor file access, network connections, and system resources
 - **🛠️ Development-optimized settings** - Ready-to-code environment
 
 **Example aliases available in sandbox:**
 - `specify` → `uvx --from git+https://github.com/github/spec-kit.git specify`
 - `claude` → Direct access to Claude Code via Claude Code Router
 - Vietnamese locale settings and custom ASCII art banner
+
+### Volume Storage and File Sharing
+Your sandbox includes a **persistent volume** that allows you to:
+
+#### **📦 Persistent Storage**
+- **Data persistence** - Files remain available across sandbox sessions
+- **Volume naming** - Automatically named based on your API key: `volume_{first3chars}_{last3chars}`
+- **Mount location** - Available at `~/volume_*` directory in your sandbox
+
+#### **🔄 File Sharing Between Sandboxes**
+You can share files and configurations between multiple sandboxes:
+
+**Example workflow:**
+```bash
+# In sandbox 1 - Save configuration files
+cp ~/.bashrc ~/volume_abc_def/
+cp ~/.claude-code-router/config.json ~/volume_abc_def/
+
+# In sandbox 2 - Access shared files
+cp ~/volume_abc_def/.bashrc ~/
+cp ~/volume_abc_def/config.json ~/.claude-code-router/
+```
+
+**Common use cases:**
+- **Share project templates** between different development environments
+- **Backup configuration files** (dotfiles, settings, scripts)
+- **Transfer data** between sandboxes with different resource allocations
+- **Collaborate** by sharing code and resources across team sandboxes
+
+**Note**: The volume is tied to your Daytona API key, so all sandboxes created with the same API key will share the same persistent volume.
 
 ## Accessing Your Sandbox
 
@@ -321,13 +354,19 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 1. **Navigate to your project folder**: `cd your-project`
 2. **Install Basic MCP servers (optional)**: `sh ~/install-basic-mcps.sh`
    - **🧠 Enhanced AI capabilities** with web search, browser automation, and memory
-3. **Initialize with spec-kit (optional)**: `specify init --here`
-4. **Start coding with AI assistance**: `claude`
+3. **Use persistent volume for file sharing**: `ls ~/volume_*`
+   - **📦 Share files between sandboxes** using the persistent volume
+   - **💾 Backup configurations** and important files to persistent storage
+4. **Monitor system resources**: `lsof` and `htop`
+   - **🔍 Check file access** and network connections with `lsof`
+   - **📊 Monitor processes** and system performance with `htop`
+5. **Initialize with spec-kit (optional)**: `specify init --here`
+6. **Start coding with AI assistance**: `claude`
    - **🧠 Intelligent model routing** based on your task
    - **🌐 Multi-provider access** to 50+ AI models
    - **⚡ Automatic optimization** for speed vs quality
-5. **Install Claude Code Web UI (optional)**: `sh ~/install-cc-webui.sh`
-6. **Customize settings**: Edit `nano ~/.claude-code-router/config.json`
+7. **Install Claude Code Web UI (optional)**: `sh ~/install-cc-webui.sh`
+8. **Customize settings**: Edit `nano ~/.claude-code-router/config.json`
 
 ### Sandbox vs Local Machine
 
@@ -337,6 +376,7 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
 | **nvm (Node.js)** | ❌ Install manually | ✅ Pre-installed (Node.js 20) |
 | **Claude Code** | ❌ Install manually | ✅ Pre-installed & configured |
 | **rsync** | ❌ Install manually | ✅ Pre-installed |
+| **lsof** | ❌ Install manually | ✅ Pre-installed |
 | **AI Router** | ❌ Setup required | ✅ Pre-configured |
 | **Vietnamese locale** | ❌ Manual setup | ✅ Pre-configured |
 | **Development tools** | ❌ Individual installs | ✅ All pre-installed |
@@ -396,6 +436,13 @@ Once connected to your sandbox, you'll have access to all pre-installed tools:
    - Check firewall settings
    - Ensure SSH access token is correct
    - Try regenerating SSH access in Daytona dashboard Web UI
+
+4. **Volume and File Sharing Issues**
+   - **Volume not found**: Check that you're using the correct API key - volumes are tied to API keys
+   - **Files not persisting**: Ensure you're saving files to `~/volume_*` directory, not just `~/`
+   - **Permission issues**: Files in volume should have proper permissions (755 for directories, 644 for files)
+   - **Sharing between sandboxes**: All sandboxes created with the same API key share the same volume
+   - **Volume size limits**: Monitor your volume usage in Daytona dashboard if files aren't saving
 
 4. **API Key Issues**
    - **No LLM Provider Configured**: You must set at least one of: `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `GROQ_API_KEY`, or `PERPLEXITY_API_KEY`
@@ -558,6 +605,7 @@ This project integrates and builds upon several open-source projects and service
 - **[PM2](https://pm2.keymetrics.io/)** - Advanced Node.js process manager
 - **[Git](https://git-scm.com/)** - Distributed version control system
 - **[Rsync](https://rsync.samba.org/)** - Fast, versatile file copying tool
+- **[lsof](https://linux.die.net/man/8/lsof)** - LiSt Open Files utility for file and network monitoring
 - **[Ubuntu](https://ubuntu.com/)** - Base container image
 - **[Curl](https://curl.se/)** - Command line tool for transferring data
 - **[Nano](https://nano-editor.org/)** - Simple text editor
